@@ -89,7 +89,7 @@ def dynamic_program(curr_inv, t, Tmin, Tmax, mean, variance, price_distribution_
 def best_initial_inventory(Tmin, Tmax, mean, variance, price_distribution_type, horizon_distribution_type, salvage_value, unit_cost, price_interval):
     key = (Tmin, Tmax, mean, variance, price_distribution_type, horizon_distribution_type, salvage_value, unit_cost, price_interval)
     if key in global_dp_inventory:
-        print(f"DP: Key Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost} has been stored.")
+        #print(f"DP: Key Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost} has been stored.")
         return global_dp_inventory[key]
     start_time = datetime.now()
     best_profit = float('-inf')
@@ -103,7 +103,7 @@ def best_initial_inventory(Tmin, Tmax, mean, variance, price_distribution_type, 
             best_inventory = inv
     global_dp_inventory[key] = (best_inventory, best_profit)
     end_time = datetime.now()
-    print(f"DP: Key Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, has been added with runtime: {end_time - start_time}")
+    #print(f"DP: Key Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, has been added with runtime: {end_time - start_time}")
     return best_inventory, best_profit
 
 def newsvender_inv_by_critical_ratio(critical_ratio, Tmin, Tmax, horizon_distribution_type, purchase_prob):
@@ -160,7 +160,7 @@ def compute_static_profit(price, inventory, mean, variance, Tmin, Tmax, price_di
 def find_best_price_and_profit_given_inventory(inventory, Tmin, Tmax, mean, variance, price_distribution_type, horizon_distribution_type, salvage_value, unit_cost, price_interval):
     key = (inventory, Tmin, Tmax, mean, variance, price_distribution_type, horizon_distribution_type, salvage_value, unit_cost, price_interval)
     if key in global_sp:
-        print(f"SP: Key inventory={inventory}, Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}) stored.")
+        #print(f"SP: Key inventory={inventory}, Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}) stored.")
         return global_sp[key]
     start_time = datetime.now()
     best_profit = float('-inf')
@@ -173,13 +173,13 @@ def find_best_price_and_profit_given_inventory(inventory, Tmin, Tmax, mean, vari
             best_price = price
     global_sp[key] = (best_price, best_profit)
     end_time = datetime.now()
-    print(f"SP: Key inventory={inventory}, Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}), price_interval={price_interval} added with runtime: {end_time - start_time}")
+    #print(f"SP: Key inventory={inventory}, Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}), price_interval={price_interval} added with runtime: {end_time - start_time}")
     return best_price, best_profit
 
 def find_static_policy(Tmin, Tmax, mean, variance, price_distribution_type, horizon_distribution_type, salvage_value, unit_cost, price_interval):
     key = (Tmin, Tmax, mean, variance, price_distribution_type, horizon_distribution_type, salvage_value, unit_cost, price_interval)
     if key in global_sp:
-        print(f"SP: Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}) stored.")
+        #print(f"SP: Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}) stored.")
         return global_sp[key]
     start_time = datetime.now()
     std = np.sqrt(variance)
@@ -197,7 +197,7 @@ def find_static_policy(Tmin, Tmax, mean, variance, price_distribution_type, hori
             best_inv = best_inv_for_price
     global_sp[key] = (best_inv, best_price, best_profit)
     end_time = datetime.now()
-    print(f"SP: Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}), price_interval={price_interval} added with runtime: {end_time - start_time}")
+    #print(f"SP: Tmin={Tmin},Tmax={Tmax},unit cost={unit_cost}, salvage={salvage_value},price distribution=({price_distribution_type},{mean},{variance}), price_interval={price_interval} added with runtime: {end_time - start_time}")
     return best_inv, best_price, best_profit
 
 def compute_all_methods(memo_list, static_price_list, mean, variance, Tmin, Tmax, price_distribution_type, horizon_distribution_type, unit_cost, salvage_value):
